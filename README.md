@@ -11,4 +11,4 @@ angular
     })
   })
 ```
-[View full example](./example/index.html)
+[View full example](./examples/index.html)
