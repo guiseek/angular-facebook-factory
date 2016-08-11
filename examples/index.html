@@ -13,7 +13,7 @@
         .module('app', ['ngFacebook'])
         .controller('AppController', function($scope, FacebookFactory) {
           FacebookFactory.init({
-            appId: '922781867788493'
+            appId: 'appId'
           })
           var me = function() {
             FacebookFactory.api('/me', {
