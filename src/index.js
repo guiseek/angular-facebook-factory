@@ -1,5 +1,5 @@
 import FacebookFactory from './factory/facebook.js'
 
 export default angular
-  .module('facebookFactory', [])
+  .module('ngFacebook', [])
   .factory('FacebookFactory', FacebookFactory.facebookFactory)

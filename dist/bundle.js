@@ -246,6 +246,6 @@ var _facebook2 = _interopRequireDefault(_facebook);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = angular.module('facebookFactory', []).factory('FacebookFactory', _facebook2.default.facebookFactory);
+exports.default = angular.module('ngFacebook', []).factory('FacebookFactory', _facebook2.default.facebookFactory);
 
 },{"./factory/facebook.js":1}]},{},[2]);

@@ -8,9 +8,11 @@
     <script src="../dist/bundle.min.js"></script>
     <script>
       angular
-        .module('app', ['facebookFactory'])
+        .module('app', ['ngFacebook'])
         .controller('AppController', function($scope, FacebookFactory) {
-          console.log(FacebookFactory)
+          FacebookFactory.init({
+            appId: 'appId'
+          })
         })
     </script>
   </body>
