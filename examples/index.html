@@ -24,7 +24,6 @@
           }
           $scope.getAuth = function(callback) {
             FacebookFactory.getLoginStatus(function(response) {
-              let token = ''
               if (response.status === 'connected') {
                 token = response.authResponse.accessToken
                 return me()
