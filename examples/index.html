@@ -1,0 +1,17 @@
+<html data-ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular Facebook Factory for AngularJS</title>
+  </head>
+  <body data-ng-controller="AppController">
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../dist/bundle.min.js"></script>
+    <script>
+      angular
+        .module('app', ['facebookFactory'])
+        .controller('AppController', function($scope, FacebookFactory) {
+          console.log(FacebookFactory)
+        })
+    </script>
+  </body>
+</html>
