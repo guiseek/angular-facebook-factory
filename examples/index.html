@@ -4,6 +4,8 @@
     <title>Angular Facebook Factory for AngularJS</title>
   </head>
   <body data-ng-controller="AppController">
+    <button type="button" data-ng-click="getAuth()">Get Auth</button>
+    <pre data-ng-bind="me | json"></pre>
     <script src="../node_modules/angular/angular.min.js"></script>
     <script src="../dist/bundle.min.js"></script>
     <script>
@@ -11,8 +13,32 @@
         .module('app', ['ngFacebook'])
         .controller('AppController', function($scope, FacebookFactory) {
           FacebookFactory.init({
-            appId: 'appId'
+            appId: '922781867788493'
           })
+          var me = function() {
+            FacebookFactory.api('/me', {
+              fields: 'name,email,gender,birthday'
+            }, function(response) {
+              $scope.me = response
+            })
+          }
+          $scope.getAuth = function(callback) {
+            FacebookFactory.getLoginStatus(function(response) {
+              let token = ''
+              if (response.status === 'connected') {
+                token = response.authResponse.accessToken
+                return me()
+              } else {
+                return FacebookFactory.login(function(response) {
+                  if (response.status === 'connected') {
+                    return me()
+                  }
+                }, {
+                  scope: 'public_profile,email,user_birthday'
+                })
+              }
+            })
+          }
         })
     </script>
   </body>
