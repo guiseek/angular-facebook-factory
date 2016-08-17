@@ -18,6 +18,7 @@ export default class FacebookFactory {
     this.$window = $window
     this.$timeout = $timeout
     this.$q = $q
+    this.lang = 'en_US'
     this.loading = false
     this.loaded = false
     this.initialized = false
@@ -28,6 +29,9 @@ export default class FacebookFactory {
     }
     this.options[name] = val
     return this
+  }
+  setLang(lang) {
+    this.lang = lang
   }
   handleResponse(response) {
     if (!response || response.error) {
@@ -59,7 +63,7 @@ export default class FacebookFactory {
         }
         js = d.createElement(s)
         js.id = id
-        js.src = '//connect.facebook.net/pt_BR/sdk.js'
+        js.src = `//connect.facebook.net/${this.lang}/sdk.js`
         fjs.parentNode.insertBefore(js, fjs)
       })(this.$window.document, 'script', 'facebook-jssdk')
 

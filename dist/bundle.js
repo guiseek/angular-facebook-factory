@@ -33,6 +33,7 @@ var FacebookFactory = function () {
     this.$window = $window;
     this.$timeout = $timeout;
     this.$q = $q;
+    this.lang = 'en_US';
     this.loading = false;
     this.loaded = false;
     this.initialized = false;
@@ -46,6 +47,11 @@ var FacebookFactory = function () {
       }
       this.options[name] = val;
       return this;
+    }
+  }, {
+    key: 'setLang',
+    value: function setLang(lang) {
+      this.lang = lang;
     }
   }, {
     key: 'handleResponse',
@@ -89,7 +95,7 @@ var FacebookFactory = function () {
             }
             js = d.createElement(s);
             js.id = id;
-            js.src = '//connect.facebook.net/pt_BR/sdk.js';
+            js.src = '//connect.facebook.net/' + _this2.lang + '/sdk.js';
             fjs.parentNode.insertBefore(js, fjs);
           })(_this2.$window.document, 'script', 'facebook-jssdk');
 

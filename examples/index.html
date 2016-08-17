@@ -5,32 +5,68 @@
   </head>
   <body data-ng-controller="AppController">
     <button type="button" data-ng-click="getAuth()">Get Auth</button>
-    <pre data-ng-bind="me | json"></pre>
+    <div data-ng-show="status">
+      <pre data-ng-bind="token"></pre>
+      <pre data-ng-bind="me | json"></pre>
+    </div>
+    <button type="button" data-ng-disabled="!status" data-ng-click="logout()">Logout</button>
+    <button type="button" data-ng-disabled="!status" data-ng-click="disconnect()">Disconnect</button>
     <script src="../node_modules/angular/angular.min.js"></script>
     <script src="../dist/bundle.min.js"></script>
     <script>
       angular
         .module('app', ['ngFacebook'])
-        .controller('AppController', function($scope, FacebookFactory) {
+        .controller('AppController', ['$scope','FacebookFactory','FacebookService',function($scope, FacebookFactory,FacebookService) {
+          FacebookFactory.setLang('pt_BR')
           FacebookFactory.init({
-            appId: 'appId'
+            appId: '922781867788493'
           })
-          var me = function() {
+          $scope.status = false
+          $scope.getAuth = function(callback) {
+            FacebookService.auth(function(response) {
+              $scope.status = true
+              $scope.token = response.authResponse.accessToken
+              FacebookService.me(function(response) {
+                $scope.me = response
+              })
+            })
+          }
+          $scope.logout = function() {
+            $scope.status = false
+            FacebookService.logout(function(response) {
+              console.log(response)
+            })
+          }
+          $scope.disconnect = function() {
+            $scope.status = false
+            FacebookService.disconnect(function(response) {
+              console.log(response)
+            })
+          }
+        }])
+        .service('FacebookService', ['$http','FacebookFactory',function($http, FacebookFactory) {
+          var service = {
+            me: me,
+            auth: auth,
+            logout: logout,
+            disconnect: disconnect
+          }
+          return service
+          function me(callback) {
             FacebookFactory.api('/me', {
               fields: 'name,email,gender,birthday'
             }, function(response) {
-              $scope.me = response
+              callback(response)
             })
           }
-          $scope.getAuth = function(callback) {
+          function auth(callback) {
             FacebookFactory.getLoginStatus(function(response) {
               if (response.status === 'connected') {
-                token = response.authResponse.accessToken
-                return me()
+                callback(response)
               } else {
-                return FacebookFactory.login(function(response) {
+                FacebookFactory.login(function(response) {
                   if (response.status === 'connected') {
-                    return me()
+                    callback(response)
                   }
                 }, {
                   scope: 'public_profile,email,user_birthday'
@@ -38,7 +74,17 @@
               }
             })
           }
-        })
+          function logout(callback) {
+            FacebookFactory.logout(function(response) {
+              callback(response)
+            })
+          }
+          function disconnect(callback) {
+            FacebookFactory.disconnect(function(response) {
+              callback(response)
+            })
+          }
+        }])
     </script>
   </body>
 </html>
