@@ -98,6 +98,6 @@ angular
 
 ## Changelog
 
-| Version | Description |
-| - | - |
-| 1.0.2 | Method setLang on factory and better documentation |
+Version | Description
+--- | ---
+1.0.2 | Method setLang on factory and better documentation
