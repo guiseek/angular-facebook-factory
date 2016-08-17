@@ -19,7 +19,7 @@
         .controller('AppController', ['$scope','FacebookFactory','FacebookService',function($scope, FacebookFactory,FacebookService) {
           FacebookFactory.setLang('pt_BR')
           FacebookFactory.init({
-            appId: '922781867788493'
+            appId: 'appId'
           })
           $scope.status = false
           $scope.getAuth = function(callback) {
