@@ -101,3 +101,11 @@ angular
 Version | Description
 --- | ---
 1.0.2 | Method setLang on factory and better documentation
+
+## Developer
+
+### npm scripts
+
+Command | Description
+--- | ---
+npm run build | Concat, Babelify and Minify 
