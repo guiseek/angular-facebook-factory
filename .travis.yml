@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - 6.9.2
+before_script:
+  - mkdir dist
+  - npm install
+script: npm run build
 before_deploy:
   - mkdir dist
   - npm install
