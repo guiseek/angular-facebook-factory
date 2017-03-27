@@ -1,15 +1,15 @@
 language: node_js
 node_js:
-- 6.9.2
+  - 6.9.2
 before_deploy:
-- mkdir dist
-- npm install
-- npm run build
+  - mkdir dist
+  - npm install
+  - npm run build
 deploy:
-- provider: pages
-- skip_cleanup: true
-- github_token: $GITHUB_TOKEN
-- local_dir: dist
-- target_branch: gh-pages
-- on:
-  - branch: master
+  - provider: pages
+  - skip_cleanup: true
+  - github_token: $GITHUB_TOKEN
+  - local_dir: dist
+  - target_branch: gh-pages
+  - on:
+    - branch: master
