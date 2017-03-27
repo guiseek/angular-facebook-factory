@@ -1,13 +1,16 @@
 language: node_js
 node_js:
   6.9.2
+before_deploy:
+
 deploy:
-  provider: pages
+  provider: releases
+  api_key:
+    secure: $GITHUB_TOKEN
+  file:
+    - "dist/bundle.js"
+    - "dist/bundle.min.js"
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: examples
-  repo: guiseek/angular-facebook-factory
-  target_branch: master
   on:
     branch: master
 install:
