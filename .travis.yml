@@ -1,10 +1,9 @@
 language: node_js
 node_js:
   6.9.2
-install:
+before_deploy:
   mkdir dist
   npm install
-before_deploy:
   npm run build
 deploy:
   provider: pages
