@@ -29,8 +29,7 @@
   "main": "./src/index.js",
   "scripts": {
     "watch": "simplifyify './src/index.js' --outfile './dist/bundle.js' --bundle --minify --watch",
-    "build": "simplifyify './src/index.js' --outfile './dist/bundle.js' --bundle --minify",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "simplifyify './src/index.js' --outfile './dist/bundle.js' --bundle --minify"
   },
   "browserify": {
     "transform": [
