@@ -11,8 +11,9 @@ deploy:
     - "dist/bundle.js"
     - "dist/bundle.min.js"
   skip_cleanup: true
+  overwrite: true
   on:
-    branch: master
+    tags: true
 install:
   mkdir dist
 before_script:
