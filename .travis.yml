@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- 6.9.2
+install:
+- mkdir dist
+before_script:
+- npm install
+script:
+- npm run build
