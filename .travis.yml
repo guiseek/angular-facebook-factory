@@ -7,13 +7,10 @@ install:
 before_deploy:
   - npm run build
 deploy:
-  provider: releases
-  api_key:
-    secure: $GITHUB_TOKEN
-  file:
-    - "dist/bundle.js"
-    - "dist/bundle.min.js"
+  provider: pages
   skip_cleanup: true
-  overwrite: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  target_branch: gh-pages
   on:
-    tags: true
+    branch: master
