@@ -1,9 +1,15 @@
 language: node_js
 node_js:
-- 6.9.2
+  6.9.2
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
 install:
-- mkdir dist
+  mkdir dist
 before_script:
-- npm install
+  npm install
 script:
-- npm run build
+  npm run build
