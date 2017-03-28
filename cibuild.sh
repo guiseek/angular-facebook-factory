@@ -16,4 +16,5 @@ cp examples/index.html .
 git init
 git add --all
 git commit -m "Deploy to GitHub Pages"
+git status
 git push --force --quiet "https://${GITHUB_TOKEN}@github.com/guiseek/angular-facebook-factory.git" master:gh-pages
