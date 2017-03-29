@@ -34,13 +34,11 @@
           $scope.logout = function() {
             FacebookService.logout(function(response) {
               $scope.status = false
-              console.log(response)
             })
           }
           $scope.disconnect = function() {
             FacebookService.disconnect(function(response) {
               $scope.status = false
-              console.log(response)
             })
           }
         }])
