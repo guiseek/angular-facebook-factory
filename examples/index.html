@@ -11,12 +11,13 @@
       <pre data-ng-bind="token"></pre>
       <pre data-ng-bind="me | json"></pre>
     </div>
+    <button type="button" data-ng-click="share()">Compartilhar</button>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="../dist/bundle.min.js"></script>
     <script>
       angular
         .module('app', ['ngFacebook'])
-        .controller('AppController', ['$scope','FacebookFactory','FacebookService',function($scope, FacebookFactory,FacebookService) {
+        .controller('AppController', ['$scope','$location','FacebookFactory','FacebookService',function($scope, $location, FacebookFactory,FacebookService) {
           FacebookFactory.setLang('pt_BR')
           FacebookFactory.init({
             appId: '1653914798246145'
@@ -41,13 +42,23 @@
               $scope.status = false
             })
           }
+          $scope.share = function() {
+            FacebookService.share({
+              href: 'http://guiseek.js.org/angular-facebook-factory',
+              title: 'Angular Facebook Factory',
+              description: 'Facebook factory for AngularJS 1.x'
+            }, function(response) {
+              console.log(response)
+            })
+          }
         }])
         .service('FacebookService', ['$http','FacebookFactory',function($http, FacebookFactory) {
           var service = {
             me: me,
             auth: auth,
             logout: logout,
-            disconnect: disconnect
+            disconnect: disconnect,
+            share: share
           }
           return service
           function me(callback) {
@@ -81,6 +92,18 @@
             FacebookFactory.disconnect(function(response) {
               callback(response)
             })
+          }
+          function share(params, callback) {
+            var obj = {
+              method: 'share',
+              mobile_iframe: true
+            }
+            FacebookFactory.ui(
+              Object.assign(obj, params),
+              function(response) {
+                callback(response)
+              }
+            )
           }
         }])
     </script>

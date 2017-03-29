@@ -16,7 +16,7 @@ angular
       status: true, // optional, default = true
       cookie: false, // optional, default = false
       xfbml: false, // optional, default = false
-      version: 'v2.4' // optional, default = v2.4
+      version: 'v2.8' // optional, default = v2.4
     })
   }])
 ```
@@ -30,7 +30,8 @@ angular
       me: me,
       auth: auth,
       logout: logout,
-      disconnect: disconnect
+      disconnect: disconnect,
+      share: share
     }
     return service
     function me(callback) {
@@ -65,6 +66,18 @@ angular
         callback(response)
       })
     }
+    function share(params, callback) {
+      var obj = {
+        method: 'share',
+        mobile_iframe: true
+      }
+      FacebookFactory.ui(
+        Object.assign(obj, params),
+        function(response) {
+          callback(response)
+        }
+      )
+    }
   }])
 ```
 
@@ -91,6 +104,15 @@ angular
         // Response handling
       })
     }
+    $scope.share = function() {
+      FacebookService.share({
+        href: 'http://guiseek.js.org/angular-facebook-factory',
+        title: 'Angular Facebook Factory',
+        description: 'Facebook factory for AngularJS 1.x'
+      }, function(response) {
+        // Response handling
+      })
+    }
   }])
 ```
 
@@ -100,6 +122,7 @@ angular
 
 Version | Description
 --- | ---
+1.1.0 | Support FB.ui to share and enhacement tasksSupports FB.ui for sharing and enhancements in npm tasks
 1.0.2 | Method setLang on factory and better documentation
 
 ## Developer
@@ -108,4 +131,6 @@ Version | Description
 
 Command | Description
 --- | ---
-npm run build | Concat, Babelify and Minify 
+npm start | Watch and open live server
+npm run watch | Concat, babelify, minify and watch
+npm run build | Concat, babelify and Minify
