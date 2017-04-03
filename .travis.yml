@@ -10,8 +10,8 @@ before_script:
 script:
 - npm run build
 deploy:
-- provider: npm
-- email: "guiseek@gmail.com"
-- api_key: "$NPM_TOKEN"
+  provider: npm
+  email: "guiseek@gmail.com"
+  api_key: "$NPM_TOKEN"
   on:
-  - branch: master
+    branch: master
